@@ -71,13 +71,6 @@ void fsk4_standby(PhysicalLayer* phy){
     phy->standby();
 }
 
-void fsk4_preamble(PhysicalLayer* phy, uint8_t len){
-    int k;
-    for (k=0; k<len; k++){
-        fsk4_writebyte(phy, 0x1B);
-    }
-}
-
 size_t fsk4_writebyte(PhysicalLayer* phy, uint8_t b){
     int k;
     // Send symbols MSB first.
@@ -93,6 +86,14 @@ size_t fsk4_writebyte(PhysicalLayer* phy, uint8_t b){
 
   return(1);
 }
+void fsk4_preamble(PhysicalLayer* phy, uint8_t len){
+    int k;
+    for (k=0; k<len; k++){
+        fsk4_writebyte(phy, 0x1B);
+    }
+}
+
+
 
 size_t fsk4_write(PhysicalLayer* phy, char* buff, size_t len){
   size_t n = 0;
